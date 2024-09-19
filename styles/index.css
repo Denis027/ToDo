@@ -1,0 +1,7 @@
+.none {
+  display: none !important;
+}
+
+.done span {
+  text-decoration: line-through;
+}
