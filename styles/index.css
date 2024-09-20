@@ -2,6 +2,10 @@
   display: none !important;
 }
 
+ul li {
+  text-decoration: none;
+}
+
 .done span {
   text-decoration: line-through;
 }
