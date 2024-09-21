@@ -2,9 +2,15 @@ const addToDoForm = document.querySelector("#addToDoForm");
 const addBtn = document.querySelector("#submitBtn");
 const taskInput = document.querySelector("#taskInput");
 const tasksList = document.querySelector("#tasksList");
-const emptyList = document.querySelector("#emptyList");
 
 let tasks = [];
+
+checkEmptyList();
+
+if (JSON.parse(localStorage.getItem("tasks"))) {
+  tasks = JSON.parse(localStorage.getItem("tasks"));
+  renderTasks();
+}
 
 addToDoForm.addEventListener("submit", addTask);
 tasksList.addEventListener("click", deleteTask);
@@ -15,34 +21,16 @@ function addTask(event) {
   //Отключаем перезагрузку страницы
   event.preventDefault();
 
-  //Берем значиние из input
-  const taskText = taskInput.value;
-
   const task = { id: Date.now(), title: taskInput.value, done: false };
-
-  const clsCSS = task.done ? "tasksListItem done" : "tasksListItem";
-
-  //Создаем разметку новой задачи
-  const taskHTML = `<li id="${task.id}" class="${clsCSS}">
-                     <span>${task.title}</span>
-                     <div id="taskBtnWrap">
-                      <button data-action="done" id="taskBtnСhange">Готово</button>
-                      <button data-action="delete" id="taskBtnDelete">Удалить</button>
-                     </div>
-                   </li>`;
-
-  //Добавляем новую задачу
   tasks.push(task);
-  tasksList.insertAdjacentHTML("beforeend", taskHTML);
 
   //Очищаем input и переводим фокус на него
   taskInput.value = "";
   taskInput.focus();
 
-  //Проверяем не пуст ли список
-  if (tasksList.children.length > 1) {
-    emptyList.classList.add("none");
-  }
+  checkEmptyList();
+  saveToLocalStorage();
+  renderTasks();
 }
 
 function deleteTask(event) {
@@ -54,11 +42,10 @@ function deleteTask(event) {
   const id = Number(parentNode.id);
 
   tasks = tasks.filter((task) => task.id !== id);
-  console.log(tasks);
 
-  if (tasksList.children.length === 1) {
-    emptyList.classList.remove("none");
-  }
+  checkEmptyList();
+  saveToLocalStorage();
+  renderTasks();
 }
 
 function doneTask(event) {
@@ -68,11 +55,42 @@ function doneTask(event) {
   parentNode.classList.toggle("done");
 
   const id = Number(parentNode.id);
-  tasks.find((task) => {
-    if (task.id === id) {
-      task.done = !task.done;
-    }
-  });
+  tasks.find((task) => (task.id === id ? (task.done = !task.done) : null));
 
-  console.log(tasks);
+  saveToLocalStorage();
+}
+
+function checkEmptyList() {
+  const emptyList = document.querySelector("#emptyList");
+  const emptyListHTML = `<li class="emptyList" id="emptyList">
+                          <h2>Список дел пуст</h2>
+                        </li>`;
+
+  if (tasks.length === 0 && !emptyList) {
+    tasksList.insertAdjacentHTML("afterbegin", emptyListHTML);
+  } else {
+    emptyList ? emptyList.remove() : null;
+  }
+}
+
+function saveToLocalStorage() {
+  localStorage.setItem("tasks", JSON.stringify(tasks));
+}
+
+function renderTasks() {
+  tasks.map((task) => {
+    const clsCSS = task.done ? "tasksListItem done" : "tasksListItem";
+
+    //Создаем разметку новой задачи
+    const taskHTML = `<li id="${task.id}" class="${clsCSS}">
+  <span>${task.title}</span>
+  <div id="taskBtnWrap">
+   <button data-action="done" id="taskBtnСhange">Готово</button>
+   <button data-action="delete" id="taskBtnDelete">Удалить</button>
+  </div>
+</li>`;
+
+    //Добавляем новую задачу
+    tasksList.insertAdjacentHTML("beforeend", taskHTML);
+  });
 }
