@@ -5,11 +5,9 @@ const tasksList = document.querySelector("#tasksList");
 
 let tasks = [];
 
-checkEmptyList();
-
 if (JSON.parse(localStorage.getItem("tasks"))) {
   tasks = JSON.parse(localStorage.getItem("tasks"));
-  renderTasks();
+  tasks.forEach((task) => renderTasks(task));
 }
 
 addToDoForm.addEventListener("submit", addTask);
@@ -24,13 +22,14 @@ function addTask(event) {
   const task = { id: Date.now(), title: taskInput.value, done: false };
   tasks.push(task);
 
+  renderTasks(task);
+
   //Очищаем input и переводим фокус на него
   taskInput.value = "";
   taskInput.focus();
 
   checkEmptyList();
   saveToLocalStorage();
-  renderTasks();
 }
 
 function deleteTask(event) {
@@ -45,7 +44,6 @@ function deleteTask(event) {
 
   checkEmptyList();
   saveToLocalStorage();
-  renderTasks();
 }
 
 function doneTask(event) {
@@ -66,7 +64,7 @@ function checkEmptyList() {
                           <h2>Список дел пуст</h2>
                         </li>`;
 
-  if (tasks.length === 0 && !emptyList) {
+  if (tasks.length === 0) {
     tasksList.insertAdjacentHTML("afterbegin", emptyListHTML);
   } else {
     emptyList ? emptyList.remove() : null;
@@ -77,12 +75,11 @@ function saveToLocalStorage() {
   localStorage.setItem("tasks", JSON.stringify(tasks));
 }
 
-function renderTasks() {
-  tasks.map((task) => {
-    const clsCSS = task.done ? "tasksListItem done" : "tasksListItem";
+function renderTasks(task) {
+  const clsCSS = task.done ? "tasksListItem done" : "tasksListItem";
 
-    //Создаем разметку новой задачи
-    const taskHTML = `<li id="${task.id}" class="${clsCSS}">
+  //Создаем разметку новой задачи
+  const taskHTML = `<li id="${task.id}" class="${clsCSS}">
   <span>${task.title}</span>
   <div id="taskBtnWrap">
    <button data-action="done" id="taskBtnСhange">Готово</button>
@@ -90,7 +87,8 @@ function renderTasks() {
   </div>
 </li>`;
 
-    //Добавляем новую задачу
-    tasksList.insertAdjacentHTML("beforeend", taskHTML);
-  });
+  //Добавляем новую задачу
+  tasksList.insertAdjacentHTML("beforeend", taskHTML);
 }
+
+checkEmptyList();
