@@ -1,0 +1,35 @@
+$mainBGColot: #eae7dc;
+$secondColor: #d8c3a5;
+$accentColor: #e98074;
+
+.none {
+  display: none !important;
+}
+body {
+  background-color: $mainBGColot;
+}
+
+button {
+  border-radius: 10px;
+  background-color: $accentColor;
+}
+
+ul {
+  list-style-type: none;
+  border-radius: 10px;
+  background-color: $secondColor;
+  padding: 5px;
+  li {
+    background-color: $mainBGColot;
+    border-radius: 10px;
+    border: 1px solid black;
+    margin-bottom: 10px;
+    padding: 5px;
+  }
+}
+
+.done span {
+  color: gray;
+  text-decoration: line-through;
+  transition: 1 all;
+}

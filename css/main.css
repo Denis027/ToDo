@@ -1,0 +1,32 @@
+.none {
+  display: none !important;
+}
+
+body {
+  background-color: #eae7dc;
+}
+
+button {
+  border-radius: 10px;
+  background-color: #e98074;
+}
+
+ul {
+  list-style-type: none;
+  border-radius: 10px;
+  background-color: #d8c3a5;
+  padding: 5px;
+}
+ul li {
+  background-color: #eae7dc;
+  border-radius: 10px;
+  border: 1px solid black;
+  margin-bottom: 10px;
+  padding: 5px;
+}
+
+.done span {
+  color: gray;
+  text-decoration: line-through;
+  transition: 1 all;
+}/*# sourceMappingURL=main.css.map */
