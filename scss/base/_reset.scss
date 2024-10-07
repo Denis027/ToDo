@@ -12,6 +12,7 @@
 }
 
 /* Links */
+
 a,
 a:link,
 a:visited {
@@ -23,6 +24,7 @@ a:hover {
 }
 
 /* Common */
+
 aside,
 nav,
 footer,
@@ -63,6 +65,7 @@ address {
 }
 
 /* Form */
+
 input,
 textarea,
 button,
@@ -78,7 +81,7 @@ input::-ms-clear {
 }
 
 button,
-input[type=submit] {
+input[type="submit"] {
   display: inline-block;
   box-shadow: none;
   background-color: transparent;
@@ -105,60 +108,3 @@ label {
 legend {
   display: block;
 }
-
-.none {
-  display: none !important;
-}
-
-body {
-  background-color: #eae7dc;
-  display: grid;
-  justify-items: center;
-}
-
-.mainTitle {
-  font-size: 26px;
-  font-weight: 900;
-}
-
-#taskInput {
-  border-radius: 10px;
-  border: 1px solid black;
-  background-color: gray;
-  color: white;
-  margin: 10px 0px;
-}
-
-.mainContainer {
-  display: grid;
-  justify-items: center;
-  width: 400px;
-  max-width: 80%;
-}
-
-button {
-  border-radius: 10px;
-  padding: 5px;
-  background-color: #e98074;
-}
-
-ul {
-  list-style-type: none;
-  width: 400px;
-  border-radius: 10px;
-  background-color: #d8c3a5;
-  padding: 5px;
-}
-ul li {
-  background-color: #eae7dc;
-  border-radius: 10px;
-  border: 1px solid black;
-  margin-bottom: 10px;
-  padding: 5px;
-}
-
-.done span {
-  color: gray;
-  text-decoration: line-through;
-  transition: 1 all;
-}/*# sourceMappingURL=main.css.map */

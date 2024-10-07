@@ -7,21 +7,22 @@
     <title>ToDo</title>
   </head>
   <body>
-    <h1>ToDo</h1>
+    <div class="mainContainer">
+      <h1 class="mainTitle">ToDo</h1>
 
-    <div id="tasksListWrap">
-      <ul id="tasksList"></ul>
+      <div id="tasksListWrap">
+        <ul id="tasksList"></ul>
+      </div>
+
+      <div id="addToDoWrap">
+        <form id="addToDoForm">
+          <div>
+            <input id="taskInput" />
+          </div>
+          <button type="submit" id="submitBtn">Добавить</button>
+        </form>
+      </div>
     </div>
-
-    <div id="addToDoWrap">
-      <form id="addToDoForm">
-        <div>
-          <input id="taskInput" />
-        </div>
-        <button type="submit" id="submitBtn">Добавить</button>
-      </form>
-    </div>
-
     <script src="/JS/main.js"></script>
   </body>
 </html>

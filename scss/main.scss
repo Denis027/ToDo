@@ -1,3 +1,6 @@
+//Base style
+@import "./base/reset";
+
 $mainBGColot: #eae7dc;
 $secondColor: #d8c3a5;
 $accentColor: #e98074;
@@ -7,18 +10,43 @@ $accentColor: #e98074;
 }
 body {
   background-color: $mainBGColot;
+  display: grid;
+  justify-items: center;
+}
+
+.mainTitle {
+  font-size: 26px;
+  font-weight: 900;
+}
+
+#taskInput {
+  border-radius: 10px;
+  border: 1px solid black;
+  background-color: gray;
+  color: white;
+  margin: 10px 0px;
+}
+
+.mainContainer {
+  display: grid;
+  justify-items: center;
+  width: 400px;
+  max-width: 80%;
 }
 
 button {
   border-radius: 10px;
+  padding: 5px;
   background-color: $accentColor;
 }
 
 ul {
   list-style-type: none;
+  width: 400px;
   border-radius: 10px;
   background-color: $secondColor;
   padding: 5px;
+
   li {
     background-color: $mainBGColot;
     border-radius: 10px;
